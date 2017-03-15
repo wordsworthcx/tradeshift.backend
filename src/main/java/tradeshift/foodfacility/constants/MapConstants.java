@@ -27,7 +27,7 @@ public class MapConstants {
 
     public static final Map<MapSourceIdentifier, String> MAP_SOURCE_KEY_MAPPING = new HashMap<MapSourceIdentifier, String>() {
         {
-            put(MapSourceIdentifier.GOOGLE, "AIzaSyD5vzXtOJxVPzFbyt8p96LYW7Il2qK6kpo");
+            put(MapSourceIdentifier.GOOGLE, "AIzaSyCAYUUcNYItswcpBESb1WAPZcMR_mVcExQ"); //AIzaSyD5vzXtOJxVPzFbyt8p96LYW7Il2qK6kpo
         }
     };
 
