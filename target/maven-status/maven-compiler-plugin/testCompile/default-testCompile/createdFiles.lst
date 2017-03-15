@@ -1,0 +1,5 @@
+tradeshift/foodfacility/utils/Constants.class
+tradeshift/foodfacility/activity/GetAllMobileFoodFacilitiesActivityTest.class
+tradeshift/foodfacility/test/AbstractTestCase.class
+tradeshift/foodfacility/translator/MobileFoodFacilityTranslatorTest.class
+tradeshift/foodfacility/utils/MobileFoodFacilityUtility.class
