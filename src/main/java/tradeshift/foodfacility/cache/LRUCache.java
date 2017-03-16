@@ -1,8 +1,6 @@
 package tradeshift.foodfacility.cache;
 
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,7 +27,7 @@ public class LRUCache<K, V> implements Cache<K, V>{
     private final Lock readLock;
     private final Lock writeLock;
 
-    public LRUCache(CachePolicy cachePolicy, int capacity) {
+    public LRUCache(CachePolicy cachePolicy, final int capacity) {
         this.cachePolicy = cachePolicy;
         this.capacity = capacity;
         this.map = new LinkedHashMap<K, V>(capacity, 0.75F, true) {
@@ -90,6 +88,6 @@ public class LRUCache<K, V> implements Cache<K, V>{
     }
 
     public boolean isExpired(K key) {
-        return !record.containsKey(key) || record.get(key).plusMillis(Math.toIntExact(cachePolicy.getFixedExpirationMillis())).isBeforeNow();
+        return !record.containsKey(key) || record.get(key).plus(cachePolicy.getFixedExpirationMillis()).isBeforeNow();
     }
 }

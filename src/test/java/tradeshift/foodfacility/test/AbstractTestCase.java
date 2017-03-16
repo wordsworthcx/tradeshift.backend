@@ -1,6 +1,5 @@
 package tradeshift.foodfacility.test;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -8,17 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import tradeshift.foodfacility.constants.Constants;
-import tradeshift.foodfacility.constants.FacilityType;
-import tradeshift.foodfacility.constants.FoodFacilityStatus;
-import tradeshift.foodfacility.model.MobileFoodFacility;
 import tradeshift.foodfacility.translator.MobileFoodFacilityTranslator;
 import tradeshift.foodfacility.utils.GsonUtility;
 import tradeshift.foodfacility.utils.MobileFoodFacilityUtility;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Base class for test cases, loads the unit testing spring configuration
@@ -28,7 +19,6 @@ import java.util.List;
  * @author xuch.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"file:spring-configuration/unit-testing-context.xml"})
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring-config/unit-testing-context.xml"})
 public abstract class AbstractTestCase {
     @Autowired

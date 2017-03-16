@@ -1,7 +1,5 @@
 package tradeshift.foodfacility.model;
 
-import tradeshift.foodfacility.constants.FacilityType;
-import tradeshift.foodfacility.constants.FoodFacilityStatus;
 import lombok.Data;
 
 /**

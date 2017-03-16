@@ -1,7 +1,5 @@
 package tradeshift.foodfacility.utils;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import tradeshift.foodfacility.exceptions.ErrorMessages;
 import tradeshift.foodfacility.model.MobileFoodFacility;
 
@@ -10,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.stereotype.Component;
 
 /**
  * A utility class of MobileFoodFacility.

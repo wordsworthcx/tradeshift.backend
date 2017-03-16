@@ -1,13 +1,8 @@
 package tradeshift.foodfacility.translator;
 
-import com.google.gson.Gson;
-import org.slf4j.helpers.MessageFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import tradeshift.foodfacility.constants.FacilityType;
 import tradeshift.foodfacility.constants.Constants;
-import tradeshift.foodfacility.exceptions.ErrorMessages;
-import tradeshift.foodfacility.exceptions.InvalidInputException;
 import tradeshift.foodfacility.model.MapExhibitionEvent;
 import tradeshift.foodfacility.model.MapExhibitionEvent.MapExhibitionEventCode;
 import tradeshift.foodfacility.model.MobileFoodFacility;

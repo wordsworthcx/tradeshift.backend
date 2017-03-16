@@ -1,7 +1,6 @@
 package tradeshift.foodfacility.activity;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 

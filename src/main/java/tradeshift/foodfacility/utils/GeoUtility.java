@@ -4,6 +4,7 @@ import org.gavaghan.geodesy.Ellipsoid;
 import org.gavaghan.geodesy.GeodeticCalculator;
 import org.gavaghan.geodesy.GlobalPosition;
 import org.springframework.stereotype.Component;
+
 import tradeshift.foodfacility.model.Coordinates;
 
 /**

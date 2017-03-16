@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import org.slf4j.helpers.MessageFormatter;
 import org.springframework.stereotype.Component;
+
 import tradeshift.foodfacility.constants.Constants;
 import tradeshift.foodfacility.exceptions.DependencyException;
 import tradeshift.foodfacility.exceptions.ErrorMessages;

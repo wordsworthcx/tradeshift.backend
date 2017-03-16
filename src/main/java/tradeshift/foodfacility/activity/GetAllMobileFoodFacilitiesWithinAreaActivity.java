@@ -23,10 +23,11 @@ import tradeshift.foodfacility.utils.CommonUtility;
 import tradeshift.foodfacility.utils.GeoUtility;
 import tradeshift.foodfacility.validator.LocationValidator;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import com.google.appengine.repackaged.com.google.common.base.Pair;
 
 /**
@@ -65,7 +66,7 @@ public class GetAllMobileFoodFacilitiesWithinAreaActivity extends AbstractActivi
                 "with radius [{}] around center location whose latitude is [{}] and longitude is [{}].",
                 request.getRadius(), center.getCoordinates().getLatitude(), center.getCoordinates().getLongitude());
 
-        PriorityQueue<Pair<Double, MobileFoodFacility>> orderedMobileFoodFacilityAround = getAllMobileFoodFacilitiesAndDistances(center);
+        List<Pair<Double, MobileFoodFacility>> orderedMobileFoodFacilityAround = getAllMobileFoodFacilitiesAndDistances(center);
         if (CollectionUtils.isEmpty(orderedMobileFoodFacilityAround)) {
             log.warn("No MobileFoodFacility retrieved");
             return response;
@@ -82,12 +83,26 @@ public class GetAllMobileFoodFacilitiesWithinAreaActivity extends AbstractActivi
                 .map(each -> each.getSecond())
                 .collect(Collectors.toList());
         */
+
         List<MobileFoodFacility> result = new ArrayList<>();
+
+        /**
+         * Google App Engine cannot support JDK 8.
+         */
+        /*
         orderedMobileFoodFacilityAround.forEach(each -> {
-                    if (each.getFirst().compareTo(request.getRadius()) < 1) {
-                        result.add(each.getSecond());
-                    }
+            if (each.getFirst().compareTo(request.getRadius()) < 1) {
+                result.add(each.getSecond());
+            }
         });
+        */
+
+        for (Pair<Double, MobileFoodFacility> each : orderedMobileFoodFacilityAround) {
+            if (each.getFirst().compareTo(request.getRadius()) > 0) {
+                break;
+            }
+            result.add(each.getSecond());
+        }
 
         if (result.isEmpty()) {
             log.warn("No MobileFoodFacility was found around location with latitude:[{}] and longitude:[{}] within radius of [{}]",
@@ -101,14 +116,14 @@ public class GetAllMobileFoodFacilitiesWithinAreaActivity extends AbstractActivi
 
     /**
      * TODO implement the comparable of Location: getCenter so that the key comparable can work
-     * @return
+     * @return a {@code List} of {@code Pair} of a {@Double} value representing the distance and a {@code MobileFoodFacilit}.
      */
 //    @Cacheable(
 //            value = CacheConstants.ALL_MOBILE_FOOD_FACILITIES_AND_DISTANCES_CACHE,
 //            key = "String.valueOf(#center.getCoordinates().getLatitude()).concat(String.valueOf(#center.getCoordinates().getLongitude()))")
-    private PriorityQueue getAllMobileFoodFacilitiesAndDistances(Location center) {
+    private List getAllMobileFoodFacilitiesAndDistances(Location center) {
 
-        PriorityQueue<Pair<Double, MobileFoodFacility>> orderedMobileFoodFacilityAround;
+        List<Pair<Double, MobileFoodFacility>> orderedMobileFoodFacilityAround;
 
         log.info("Trying to read cache for mobile food facilities around location[latitude:{}, longitude:{}]",
                 center.getCoordinates().getLatitude(), center.getCoordinates().getLongitude());
@@ -128,6 +143,11 @@ public class GetAllMobileFoodFacilitiesWithinAreaActivity extends AbstractActivi
         if (cache.isExpired(cacheKey)) {
             log.info("Cache was expired or not shoot. Will retrive data and update it into cache");
             List<MobileFoodFacility> mobileFoodFacilities = getAllMobileFoodFacilitiesActivity.enact(null).getMobileFoodFacilities();
+
+            /**
+             * Google App Engine cannot support JDK 8.
+             */
+            /*
             orderedMobileFoodFacilityAround = new PriorityQueue<>(
                     (Pair<Double, MobileFoodFacility> first, Pair<Double, MobileFoodFacility> second)
                             -> first.getFirst().compareTo(second.getFirst()));
@@ -139,10 +159,28 @@ public class GetAllMobileFoodFacilitiesWithinAreaActivity extends AbstractActivi
                     orderedMobileFoodFacilityAround.add(Pair.of(distance, each));
                 });
             }
+            */
+
+            orderedMobileFoodFacilityAround = new ArrayList<>();
+            if (!CollectionUtils.isEmpty(mobileFoodFacilities)) {
+                for (MobileFoodFacility each : mobileFoodFacilities) {
+                    Double distance = geoUtility.getGeoDistance(each.getLatitude(), each.getLongitude(),
+                            center.getCoordinates().getLatitude(), center.getCoordinates().getLongitude());
+                    orderedMobileFoodFacilityAround.add(Pair.of(distance, each));
+                }
+            }
+
+            Collections.sort(orderedMobileFoodFacilityAround, new Comparator<Pair<Double, MobileFoodFacility>>() {
+                @Override
+                public int compare(Pair<Double, MobileFoodFacility> o1, Pair<Double, MobileFoodFacility> o2) {
+                    return o1.getFirst().compareTo(o2.getFirst());
+                }
+            });
+
             cache.set(cacheKey, orderedMobileFoodFacilityAround);
         } else {
             log.info("Cache was shoot, will return all mobile food facilities from cache");
-            orderedMobileFoodFacilityAround = (PriorityQueue<Pair<Double, MobileFoodFacility>>)cache.get(cacheKey);
+            orderedMobileFoodFacilityAround = (List<Pair<Double, MobileFoodFacility>>)cache.get(cacheKey);
         }
 
         return orderedMobileFoodFacilityAround;

@@ -39,6 +39,7 @@ tradeshift/foodfacility/constants/Constants$LocationTypeSerializedName.class
 tradeshift/foodfacility/constants/MapConstants$2.class
 tradeshift/foodfacility/model/MapExhibitionEvent$MapExhibitionEventCode.class
 tradeshift/foodfacility/constants/CacheConstants.class
+tradeshift/foodfacility/activity/GetAllMobileFoodFacilitiesWithinAreaActivity$1.class
 tradeshift/foodfacility/translator/BaseTranslator.class
 tradeshift/foodfacility/translator/MobileFoodFacilityTranslator$2.class
 tradeshift/foodfacility/cache/CacheClient.class

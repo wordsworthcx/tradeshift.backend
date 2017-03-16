@@ -1,8 +1,9 @@
 package tradeshift.foodfacility.utils;
 
-import org.springframework.stereotype.Component;
 import tradeshift.foodfacility.constants.MapConstants;
 import tradeshift.foodfacility.model.Location;
+
+import org.springframework.stereotype.Component;
 
 /**
  * @author xuch.

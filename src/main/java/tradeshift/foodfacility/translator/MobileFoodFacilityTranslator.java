@@ -1,26 +1,25 @@
 package tradeshift.foodfacility.translator;
 
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import lombok.extern.slf4j.Slf4j;
-import org.joda.time.DateTime;
-
-import org.slf4j.helpers.MessageFormatter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import tradeshift.foodfacility.constants.Constants;
 import tradeshift.foodfacility.exceptions.ErrorMessages;
 import tradeshift.foodfacility.exceptions.InvalidInputException;
 import tradeshift.foodfacility.model.Coordinates;
 import tradeshift.foodfacility.model.MobileFoodFacility;
 import tradeshift.foodfacility.translator.model.CoordinatesDeserializer;
-import tradeshift.foodfacility.translator.model.CoordinatesTypeAdapter;
 import tradeshift.foodfacility.translator.model.DateTimeTypeAdapter;
 import tradeshift.foodfacility.translator.model.FoodItemsTypeAdapter;
-import tradeshift.foodfacility.utils.GsonUtility;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
+
+import org.joda.time.DateTime;
+import org.slf4j.helpers.MessageFormatter;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 /**
  * @author xuch.
  */

@@ -1,6 +1,7 @@
 package tradeshift.foodfacility.utils;
 
 import org.springframework.stereotype.Component;
+
 import tradeshift.foodfacility.constants.Constants;
 
 /**

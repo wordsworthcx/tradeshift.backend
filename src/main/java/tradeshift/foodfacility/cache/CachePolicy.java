@@ -24,14 +24,14 @@ public class CachePolicy {
     }
 
     public CachePolicy(long fixedExpirationMillis) {
-        this.fixedExpirationMillis = fixedExpirationMillis;
+        this.fixedExpirationMillis = fixedExpirationMillis > 0 ? fixedExpirationMillis : DEFAULT_FIXED_EXPIRATION_MILLIS;
         this.initialExpirationMillis = DEFAULT_INITIAL_EXPIRATION_MILLIS;
         this.initialExpired = DEFAULT_INITIAL_EXPIRED;
     }
 
     public CachePolicy(long fixedExpirationMillis, long initialExpirationMillis, boolean initialExpired) {
-        this.fixedExpirationMillis = fixedExpirationMillis;
-        this.initialExpirationMillis = initialExpirationMillis;
+        this.fixedExpirationMillis = fixedExpirationMillis > 0 ? fixedExpirationMillis : DEFAULT_FIXED_EXPIRATION_MILLIS;
+        this.initialExpirationMillis = initialExpirationMillis > 0 ? initialExpirationMillis : DEFAULT_INITIAL_EXPIRATION_MILLIS;
         this.initialExpired = initialExpired;
     }
 

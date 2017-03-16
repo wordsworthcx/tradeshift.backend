@@ -3,7 +3,6 @@ package tradeshift.foodfacility.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import tradeshift.foodfacility.constants.Constants;
 
 /**
  * @author xuch.

@@ -18,7 +18,7 @@
     <!-- [START set_versions] -->
     <properties>
         <appengine.app.version>1</appengine.app.version>
-        <appengine.sdk.version>1.9.48</appengine.sdk.version>
+        <appengine.sdk.version>1.9.46</appengine.sdk.version>
 
         <objectify.version>5.1.5</objectify.version>
         <guava.version>18.0</guava.version>
@@ -268,8 +268,8 @@
                 <version>3.2</version>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>

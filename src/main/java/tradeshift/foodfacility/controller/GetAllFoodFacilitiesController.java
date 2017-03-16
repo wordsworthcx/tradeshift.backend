@@ -2,12 +2,12 @@ package tradeshift.foodfacility.controller;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import tradeshift.foodfacility.activity.ActivityFactory;
 import tradeshift.foodfacility.activity.GetAllMobileFoodFacilitiesActivity;
 import tradeshift.foodfacility.activity.GetAllMobileFoodFacilitiesWithinAreaActivity;
@@ -16,15 +16,14 @@ import tradeshift.foodfacility.activity.model.GetAllMobileFoodFacilitiesWithinAr
 import tradeshift.foodfacility.activity.model.GetAllMobileFoodFacilitiesWithinAreaResponse;
 import tradeshift.foodfacility.model.Coordinates;
 import tradeshift.foodfacility.model.Location;
+import tradeshift.foodfacility.model.MobileFoodFacility;
 import tradeshift.foodfacility.model.MapExhibitionEvent;
 import tradeshift.foodfacility.translator.MapExhibitionEventTranslator;
 import tradeshift.foodfacility.utils.GsonUtility;
 import tradeshift.foodfacility.utils.MapUtility;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author xuch.
@@ -93,6 +92,18 @@ public class GetAllFoodFacilitiesController {
         List<MapExhibitionEvent> mapExhibitionEvents = new ArrayList<>();
         GetAllMobileFoodFacilitiesResponse response = getAllMobileFoodFacilitiesActivity.enact(null);
         if (!CollectionUtils.isEmpty(response.getMobileFoodFacilities())) {
+            for (MobileFoodFacility each : response.getMobileFoodFacilities()) {
+                try {
+                    MapExhibitionEvent exhibitionEvent = mapExhibitionEventTranslator.translate(each);
+                    mapExhibitionEvents.add(exhibitionEvent);
+                } catch (Exception e) {
+                    log.warn("Translation from MobileFoodFacility:[{}] to MapExhibitionEvent failed", gsonUtility.serialize(each));
+                }
+            }
+            /**
+             * Google App Engine cannot support JDK 8.
+             */
+            /*
             response.getMobileFoodFacilities().forEach(each -> {
                 try {
                     MapExhibitionEvent exhibitionEvent = mapExhibitionEventTranslator.translate(each);
@@ -101,6 +112,7 @@ public class GetAllFoodFacilitiesController {
                     log.warn("Translation from MobileFoodFacility:[{}] to MapExhibitionEvent failed", gsonUtility.serialize(each));
                 }
             });
+            */
         }
         return gsonUtility.serialize(mapExhibitionEvents);
     }
@@ -121,6 +133,18 @@ public class GetAllFoodFacilitiesController {
         List<MapExhibitionEvent> mapExhibitionEvents = new ArrayList<>();
         GetAllMobileFoodFacilitiesWithinAreaResponse response = getAllMobileFoodFacilitiesWithinAreaActivity.enact(request);
         if (!CollectionUtils.isEmpty(response.getMobileFoodFacilities())) {
+            for (MobileFoodFacility each : response.getMobileFoodFacilities()) {
+                try {
+                    MapExhibitionEvent exhibitionEvent = mapExhibitionEventTranslator.translate(each);
+                    mapExhibitionEvents.add(exhibitionEvent);
+                } catch (Exception e) {
+                    log.warn("Translation from MobileFoodFacility:[{}] to MapExhibitionEvent failed", gsonUtility.serialize(each));
+                }
+            }
+            /**
+             * Google App Engine cannot support JDK 8.
+             */
+            /*
             response.getMobileFoodFacilities().forEach(each -> {
                 try {
                     MapExhibitionEvent exhibitionEvent = mapExhibitionEventTranslator.translate(each);
@@ -129,6 +153,7 @@ public class GetAllFoodFacilitiesController {
                     log.warn("Translation from MobileFoodFacility:[{}] to MapExhibitionEvent failed", gsonUtility.serialize(each));
                 }
             });
+            */
         }
         return gsonUtility.serialize(mapExhibitionEvents);
     }

@@ -2,9 +2,9 @@ package tradeshift.foodfacility.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import tradeshift.foodfacility.model.MobileFoodFacility;
-
 import org.apache.commons.lang.Validate;
+
+import tradeshift.foodfacility.model.MobileFoodFacility;
 
 /**
  * @author xuch.

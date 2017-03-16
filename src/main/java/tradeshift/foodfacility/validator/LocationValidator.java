@@ -2,6 +2,7 @@ package tradeshift.foodfacility.validator;
 
 import org.apache.commons.lang.Validate;
 import org.springframework.stereotype.Component;
+
 import tradeshift.foodfacility.model.Location;
 
 /**

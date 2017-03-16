@@ -1,7 +1,5 @@
 package tradeshift.foodfacility.model;
 
-import com.google.gson.annotations.SerializedName;
-import lombok.Data;
 import tradeshift.foodfacility.constants.Constants;
 import tradeshift.foodfacility.constants.FacilityType;
 import tradeshift.foodfacility.constants.FoodFacilityStatus;
@@ -9,6 +7,10 @@ import tradeshift.foodfacility.constants.FoodFacilityStatus;
 import java.util.List;
 
 import org.joda.time.DateTime;
+
+import com.google.gson.annotations.SerializedName;
+
+import lombok.Data;
 
 /**
  * @author xuch.

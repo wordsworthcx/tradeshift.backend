@@ -1,10 +1,8 @@
 package tradeshift.foodfacility.translator;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Assert;
 import org.junit.Test;
-import org.slf4j.helpers.MessageFormatter;
 
 import tradeshift.foodfacility.constants.FacilityType;
 import tradeshift.foodfacility.model.MobileFoodFacility;

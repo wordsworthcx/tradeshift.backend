@@ -1,7 +1,12 @@
 package tradeshift.foodfacility.translator.model;
 
-import com.google.gson.*;
 import tradeshift.foodfacility.model.Coordinates;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonDeserializationContext;
 
 import java.lang.reflect.Type;
 
